@@ -15,12 +15,22 @@ public class TMdbController {
 
 
     @GetMapping("/{media}/{category}")
-    public JsonNode getPopularMovie(@PathVariable String media, @PathVariable String category) {
+    public JsonNode getInfoMedia(@PathVariable String media, @PathVariable String category) {
         return this.tmdb.getMainResponse(media, category);
     }
 
     @GetMapping("/multi")
     public JsonNode getMultiSearch(@RequestParam("query") String stringQuery) {
         return this.tmdb.getMultiResponse(stringQuery);
+    }
+
+    @GetMapping("/{media}/images/{uniqueId}")
+    public JsonNode getLogosMedia(@PathVariable String media, @PathVariable String uniqueId) {
+        return this.tmdb.getLogoResponse(media, uniqueId);
+    }
+
+    @GetMapping("/{media}")
+    public JsonNode getDetailsMedia(@PathVariable String media, @RequestParam("mediaId") String mediaId) {
+        return this.tmdb.getDetailsResponse(media, mediaId);
     }
 }

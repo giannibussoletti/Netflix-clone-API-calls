@@ -46,4 +46,26 @@ public class TMdbApiService {
 
     }
 
+    public JsonNode getLogoResponse(String media, String uniqueId) {
+        return restClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/{media}/{uniqueId}/images")
+                        .queryParam("include_image_language", "en-US")
+                        .build(media, uniqueId))
+                .header("Authorization", "Bearer " + apiKey)
+                .retrieve().body(JsonNode.class);
+
+    }
+
+    public JsonNode getDetailsResponse(String media, String mediaId) {
+
+        return restClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/{media}/{mediaId}")
+                        .queryParam("language", "en-US")
+                        .build(media, mediaId)
+                ).header("Authorization", "Bearer " + apiKey)
+                .retrieve()
+                .body(JsonNode.class);
+    }
 }
