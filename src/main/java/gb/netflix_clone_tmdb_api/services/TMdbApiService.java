@@ -36,7 +36,7 @@ public class TMdbApiService {
     public JsonNode getMultiResponse(String searchQuery) {
         return restClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/media/multi")
+                        .path("/search/multi")
                         .queryParam("query", searchQuery)
                         .queryParam("include_adult", "false")
                         .queryParam("language", "en-US")
