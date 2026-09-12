@@ -1,6 +1,6 @@
 # 🎬 Netflix Clone TMDB API
 
-Proxy REST sviluppato in **Spring Boot** per il progetto [Netflix Clone](https://github.com/giannibussoletti/Netflix-Clone-Refactor-JS-to-TS). Il servizio inoltra le richieste verso le API di **TMDB**, evitando che la chiave API venga esposta lato client nel front-end.
+Proxy REST sviluppato in **Spring Boot** per il progetto [Netflix Clone](https://github.com/giannibussoletti/Netflix-Clone-Refactor-JS-to-TS). Il servizio inoltra le richieste verso le API di **The Movie Database (TMDB)**, evitando che la chiave API venga esposta lato client nel front-end.
 
 **Repository front-end:** [Netflix-Clone-Refactor-JS-to-TS](https://github.com/giannibussoletti/Netflix-Clone-Refactor-JS-to-TS)
 
@@ -27,7 +27,7 @@ Tutti gli endpoint sono esposti sotto il path `/api` e accettano esclusivamente 
 | GET | `/api/{media}/images/{uniqueId}` | `media`, `uniqueId` — id del titolo | Restituisce le immagini (loghi, poster, backdrop) associate al titolo |
 | GET | `/api/{media}?mediaId={mediaId}` | `media`, `mediaId` — id del titolo | Restituisce i dettagli completi di un titolo (trama, anno, durata, generi, voto, ecc.) |
 
-Ogni richiesta viene inoltrata a TMDB con l'header `Authorization: Bearer <TMDB_BEARER_KEY>` e con lingua impostata su `en-US`.
+Ogni richiesta viene inoltrata a TMDB con l'header `Authorization: Bearer <BEARER_KEY>` e con lingua impostata su `en-US`.
 
 ---
 
@@ -37,18 +37,18 @@ Il servizio richiede due parametri di configurazione, impostabili come variabili
 
 | Variabile | Descrizione | Obbligatoria |
 |---|---|---|
-| `TMDB_BEARER_KEY` | Bearer token (API Read Access Token) di TMDB, mappato sulla proprietà `tmdb.bearer.key` | Sì |
-| `SERVER_PORT` | Porta su cui viene esposta l'applicazione (default Spring: `8080`) | No |
+| `BEARER_KEY` | Bearer token (API Read Access Token) di TMDB, mappato sulla proprietà `tmdb.bearer.key` | Sì |
+| `PORT` | Porta su cui viene esposta l'applicazione (default Spring: `8080`) | No |
 
 ### Ottenere la chiave API di TMDB
 
-La chiave utilizzata dal servizio è l'**API Read Access Token (v4 auth)** fornito da TMDB. Per ottenerla:
+La chiave utilizzata dal servizio è l'**API Read Access Token** fornito da TMDB. Per ottenerla:
 
 1. Creazione di un account su [themoviedb.org](https://www.themoviedb.org/signup)
 2. Conferma dell'account tramite il link ricevuto via email
 3. Accesso alla sezione **Impostazioni → API** dal proprio profilo ([themoviedb.org/settings/api](https://www.themoviedb.org/settings/api))
 4. Richiesta di una nuova API key, selezionando l'opzione **Developer** e compilando il form richiesto (nome dell'applicazione, motivazione d'uso, ecc.)
-5. Una volta approvata, copia del valore **API Read Access Token (v4 auth)** — non del "API Key (v3 auth)" — da utilizzare come `TMDB_BEARER_KEY`
+5. Una volta approvata, copia del valore **API Read Access Token** — non del "API Key" — da utilizzare come `BEARER_KEY`
 
 ---
 
@@ -66,7 +66,7 @@ Il progetto può essere avviato tramite un IDE con supporto Java/Maven (es. Inte
 ./mvnw spring-boot:run
 ```
 
-Prima dell'avvio è necessario impostare la variabile d'ambiente `TMDB_BEARER_KEY` (o valorizzare `tmdb.bearer.key` in `application.properties`) con il token ottenuto da TMDB.
+Prima dell'avvio è necessario impostare la variabile d'ambiente `BEARER_KEY` (o valorizzare `tmdb.bearer.key` in `application.properties`) con il token ottenuto da TMDB.
 
 Una volta avviato, il servizio risulta disponibile all'indirizzo `http://localhost:<PORT>/api`.
 
@@ -74,7 +74,7 @@ Una volta avviato, il servizio risulta disponibile all'indirizzo `http://localho
 
 ## 🌐 Deploy
 
-Il back-end è deployato su **Railway**, a supporto della demo live del front-end pubblicata su Vercel, che non fornisce un ambiente di esecuzione per applicazioni Java.
+Il back-end è deployato su **Railway**, a supporto della demo live del front-end pubblicata su Vercel.
 
 ---
 
